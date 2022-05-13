@@ -1,4 +1,5 @@
 import requests
+import json
 
 from typing import Optional
 
@@ -19,7 +20,7 @@ class TwirpRpcClient:
 
         result = requests.post(
             url,
-            json=data,
+            data=json.dumps(data),
             headers={**headers, "Content-Type": "application/json"},
         )
 

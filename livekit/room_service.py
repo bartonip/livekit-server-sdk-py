@@ -35,7 +35,7 @@ class RoomServiceClient:
         return self.parent._twirp_client.request(
             self.service,
             "ListRooms",
-            json.dumps(names),
+            {"names": names},
             self.auth_header(VideoGrant(room_list=True)),
         )
 
