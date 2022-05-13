@@ -8,9 +8,8 @@ from .grants import VideoGrant, ClaimGrants
 class AccessToken:
     def __init__(
         self,
-        api_key: str,
-        api_secret: str,
-        name: str,
+        parent,
+        name: Optional[str] = None,
         identity: Optional[str] = None,
         ttl: Optional[timedelta] = timedelta(hours=1),
         metadata: Optional[str] = None,
@@ -22,8 +21,7 @@ class AccessToken:
         self.metadata = metadata
         self.grants = ClaimGrants(name=name)
 
-        self.api_key = api_key
-        self.api_secret = api_secret
+        self.parent = parent
 
     @property
     def sha256(self):
@@ -42,7 +40,7 @@ class AccessToken:
 
         token_data = {
             "exp": datetime.now() + self.ttl,
-            "iss": self.api_key,
+            "iss": self.parent.api_key,
             "nbf": datetime.now(),
             **self.grants.to_dict()
         }
@@ -51,7 +49,7 @@ class AccessToken:
             token_data["sub"] = self.identity
             token_data["kid"] = self.identity
 
-        return jwt.encode(token_data, self.api_secret).decode("utf-8")
+        return jwt.encode(token_data, self.parent.api_secret).decode("utf-8")
 
 
 class TokenVerifier:
