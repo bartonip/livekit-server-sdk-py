@@ -30,6 +30,9 @@ class VideoGrant:
 
     @classmethod
     def from_dict(cls, data):
+        if data is None:
+            return cls()
+
         return cls(
             room_create=data.get("room_create"),
             room_join=data.get("room_join"),

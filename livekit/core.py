@@ -1,4 +1,10 @@
+import base64
+import hashlib
+import json
 import jwt
+
+
+from typing import Optional
 
 from .tokens import AccessToken
 from .room_service import RoomServiceClient
@@ -31,3 +37,14 @@ class LiveKit:
         decoded = jwt.decode(token, self.api_secret)
 
         return ClaimGrants.from_jwt(decoded)
+
+    def receive(self, body: str, auth_header: Optional[str], skip_auth: bool = False):
+        if skip_auth is False and not auth_header:
+            raise Exception("Authorization header is empty")
+
+        claims = self.verify(auth_header)
+        checksum = hashlib.sha256(body.encode()).digest()
+
+        assert claims.sha256 == base64.b64encode(checksum).decode("utf-8"), "sha256 checksum of body does not match"
+
+        return json.loads(body)
