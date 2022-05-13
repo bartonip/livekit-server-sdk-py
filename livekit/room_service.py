@@ -1,7 +1,8 @@
+import json
 from datetime import timedelta
 from typing import Optional, List
 
-from .grants import VideoGrant
+from livekit.grants import VideoGrant
 
 class RoomServiceClient:
     def __init__(self, parent):
@@ -34,7 +35,7 @@ class RoomServiceClient:
         return self.parent._twirp_client.request(
             self.service,
             "ListRooms",
-            names,
+            json.dumps(names),
             self.auth_header(VideoGrant(room_list=True)),
         )
 

@@ -1,4 +1,3 @@
-
 import requests
 
 from typing import Optional
@@ -22,4 +21,4 @@ class TwirpRpcClient:
             url,
             data=data,
             headers=headers,
-        ).json()
+        )

@@ -1,9 +1,10 @@
 import jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from typing import Optional
 
-from .grants import VideoGrant, ClaimGrants
+from livekit.grants import VideoGrant, ClaimGrants
+from livekit.utilities import clean_null_terms
 
 class AccessToken:
     def __init__(
@@ -39,9 +40,9 @@ class AccessToken:
             raise Exception("Identity is required for join but not set")
 
         token_data = {
-            "exp": datetime.now() + self.ttl,
+            "exp": datetime.utcnow() + self.ttl,
             "iss": self.parent.api_key,
-            "nbf": datetime.now(),
+            "nbf": datetime.utcnow() - timedelta(seconds=10),
             **self.grants.to_dict()
         }
         
@@ -49,7 +50,7 @@ class AccessToken:
             token_data["sub"] = self.identity
             token_data["kid"] = self.identity
 
-        return jwt.encode(token_data, self.parent.api_secret).decode("utf-8")
+        return jwt.encode(clean_null_terms(token_data), self.parent.api_secret).decode("utf-8")
 
 
 class TokenVerifier:

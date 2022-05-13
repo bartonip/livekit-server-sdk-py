@@ -6,12 +6,12 @@ import jwt
 
 from typing import Optional
 
-from .tokens import AccessToken
-from .room_service import RoomServiceClient
-from .recording_service import RecordingServiceClient
-from .egress import EgressClient
-from .grants import ClaimGrants
-from .twirp_rpc import TwirpRpcClient
+from livekit.tokens import AccessToken
+from livekit.room_service import RoomServiceClient
+from livekit.recording_service import RecordingServiceClient
+from livekit.egress import EgressClient
+from livekit.grants import ClaimGrants
+from livekit.twirp_rpc import TwirpRpcClient
 
 class LiveKit:
     def __init__(
@@ -24,6 +24,10 @@ class LiveKit:
     ):
         self.api_key = api_key
         self.api_secret = api_secret
+
+        self.host = host
+        self.package = package
+        self.twirp_prefix = twirp_prefix
 
         self._twirp_client = TwirpRpcClient(self)
         self.room_service = RoomServiceClient(self)

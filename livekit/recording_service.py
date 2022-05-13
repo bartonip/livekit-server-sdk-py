@@ -1,4 +1,4 @@
-from .grants import VideoGrant
+from livekit.grants import VideoGrant
 
 from typing import Optional
 

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 # The version of this tool is based on the following steps:
 # https://packaging.python.org/guides/single-sourcing-package-version/
-VERSION = {0, 0, 1}
+VERSION = {}
 
 with open("./livekit/__init__.py") as fp:
     # pylint: disable=W0122

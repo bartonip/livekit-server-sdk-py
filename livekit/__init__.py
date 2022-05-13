@@ -1,1 +1,1 @@
-from .core import LiveKit
+from livekit.core import LiveKit
