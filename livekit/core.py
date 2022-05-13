@@ -2,6 +2,7 @@ import jwt
 
 from .tokens import AccessToken
 from .room_service import RoomServiceClient
+from .recording_service import RecordingServiceClient
 from .grants import ClaimGrants
 from .twirp_rpc import TwirpRpcClient
 
@@ -17,8 +18,9 @@ class LiveKit:
         self.api_key = api_key
         self.api_secret = api_secret
 
-        self.room_service = RoomServiceClient(self)
         self._twirp_client = TwirpRpcClient(self)
+        self.room_service = RoomServiceClient(self)
+        self.recording_service = RecordingServiceClient(self)
 
     def generate_access_token(self, name: str = None, identity: str = None):
         return AccessToken(parent=self, name=name, identity=identity)

@@ -1,7 +1,7 @@
+from datetime import timedelta
+from typing import Optional, List
+
 from .grants import VideoGrant
-
-from typing import Optional
-
 
 class RoomServiceClient:
     def __init__(self, parent):
@@ -120,7 +120,7 @@ class RoomServiceClient:
 
         )
 
-    def update_subscriptions(self, room: str, identity: str, track_sids: list[str], subscribe: bool):
+    def update_subscriptions(self, room: str, identity: str, track_sids: List[str], subscribe: bool):
         return self.parent._twirp_client.request(
             self.service,
             "UpdateSubscriptions",
@@ -129,10 +129,10 @@ class RoomServiceClient:
 
         )
 
-    def send_data(self, room: str, data: bytes, kind: str, destinationSids: list[str]):
+    def send_data(self, room: str, data: bytes, kind: str, destinationSids: List[str]):
         return self.parent._twirp_client.request(
             self.service,
             "SendData",
-            {"room": room, "data" base64.b64encode(bytes).decode("utf-8"), "kind": kind, "destinationSids": destinationSids},
+            {"room": room, "data": base64.b64encode(bytes).decode("utf-8"), "kind": kind, "destinationSids": destinationSids},
             self.auth_header(VideoGrant(room_admin=True, room=room)),
         )
