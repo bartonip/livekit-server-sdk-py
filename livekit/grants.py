@@ -49,15 +49,15 @@ class VideoGrant:
 
     def to_dict(self):
         return {
-            "room_create": self.room_create,
-            "room_join": self.room_join,
-            "room_list": self.room_list,
-            "room_record": self.room_record,
-            "room_admin": self.room_admin,
+            "roomCreate": self.room_create,
+            "roomJoin": self.room_join,
+            "roomList": self.room_list,
+            "roomRecord": self.room_record,
+            "roomAdmin": self.room_admin,
             "room": self.room,
-            "can_publish": self.can_publish,
-            "can_subscribe": self.can_subscribe,
-            "can_publish_data": self.can_publish_data,
+            "canPublish": self.can_publish,
+            "canSubscribe": self.can_subscribe,
+            "canPublishData": self.can_publish_data,
             "hidden": self.hidden,
             "recorder": self.recorder,
         }

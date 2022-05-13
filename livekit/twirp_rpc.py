@@ -15,10 +15,15 @@ class TwirpRpcClient:
         headers: Optional[any] = None,
     ):
 
-        url = f"{self.parent.host}/{self.parent.twirp_prefix}/{self.parent.package}.{service}/{method}"
+        url = f"{self.parent.host}{self.parent.twirp_prefix}/{self.parent.package}.{service}/{method}"
 
-        return requests.post(
+        result = requests.post(
             url,
-            data=data,
-            headers=headers,
+            json=data,
+            headers={**headers, "Content-Type": "application/json"},
         )
+
+        try:
+            return result.json()
+        except Exception:
+            return result
