@@ -2,7 +2,7 @@ from livekit.grants import VideoGrant
 
 from typing import Optional
 
+from livekit.base_client import BaseClient
 
-class EgressClient:
-    def __init__(self, parent):
-         self.parent = parent
+class EgressClient(BaseClient):
+    pass

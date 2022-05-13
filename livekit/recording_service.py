@@ -1,19 +1,11 @@
 from livekit.grants import VideoGrant
 
 from typing import Optional
+from livekit.base_client import BaseClient
 
 
-class RecordingServiceClient:
-    def __init__(self, parent):
-        self.parent = parent
-        self.service = "RecordingService"
-
-    def auth_header(self, grant: VideoGrant):
-        token = self.parent.generate_access_token()
-        token.add_grant(grant)
-        return {
-            "Authorization": f"Bearer {token.to_jwt()}"
-        }
+class RecordingServiceClient(BaseClient):
+    service = "RecordingService"
 
     def start_recording(self, url: str, filepath: str, options: dict):
         return self.parent._twirp_client.request(

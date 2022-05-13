@@ -34,15 +34,15 @@ class VideoGrant:
             return cls()
 
         return cls(
-            room_create=data.get("room_create"),
-            room_join=data.get("room_join"),
-            room_list=data.get("room_list"),
-            room_record=data.get("room_record"),
-            room_admin=data.get("room_admin"),
+            room_create=data.get("roomCreate"),
+            room_join=data.get("roomJoin"),
+            room_list=data.get("roomList"),
+            room_record=data.get("roomRecord"),
+            room_admin=data.get("roomAdmin"),
             room=data.get("room"),
-            can_publish=data.get("can_publish"),
-            can_subscribe=data.get("can_subscribe"),
-            can_publish_data=data.get("can_publish_data"),
+            can_publish=data.get("canPublish"),
+            can_subscribe=data.get("canSubscribe"),
+            can_publish_data=data.get("canPublishData"),
             hidden=data.get("hidden"),
             recorder=data.get("recorder"),
         )

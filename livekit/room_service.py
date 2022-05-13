@@ -3,18 +3,10 @@ from datetime import timedelta
 from typing import Optional, List
 
 from livekit.grants import VideoGrant
+from livekit.base_client import BaseClient
 
-class RoomServiceClient:
-    def __init__(self, parent):
-        self.parent = parent
-        self.service = "RoomService"
-
-    def auth_header(self, grant: VideoGrant):
-        token = self.parent.generate_access_token()
-        token.add_grant(grant)
-        return {
-            "Authorization": f"Bearer {token.to_jwt()}"
-        }
+class RoomServiceClient(BaseClient):
+    service = "RoomService"
 
     def create_room(self, name: str, empty_timeout: timedelta = timedelta(minutes=30), max_participants: int = 20, node_id: Optional[str] = None, metadata: Optional[str] = None):
         return self.parent._twirp_client.request(

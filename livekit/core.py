@@ -3,6 +3,7 @@ import hashlib
 import json
 import jwt
 
+from datetime import timedelta
 
 from typing import Optional
 
@@ -34,8 +35,8 @@ class LiveKit:
         self.recording_service = RecordingServiceClient(self)
         self.egress_client = EgressClient(self)
 
-    def generate_access_token(self, name: str = None, identity: str = None):
-        return AccessToken(parent=self, name=name, identity=identity)
+    def generate_access_token(self, name: str = None, identity: str = None, ttl: Optional[timedelta] = timedelta(hours=1), metadata: Optional[str] = None):
+        return AccessToken(parent=self, name=name, identity=identity, ttl=ttl, metadata=metadata)
 
     def verify(self, token: str):
         decoded = jwt.decode(token, self.api_secret)
