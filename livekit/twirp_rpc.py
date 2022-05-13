@@ -15,7 +15,7 @@ class TwirpRpcClient:
         headers: Optional[any] = None,
     ):
 
-        url = f"{self.parent.host}/{self.parent.package}.{service}/{method}"
+        url = f"{self.parent.host}/{self.parent.twirp_prefix}/{self.parent.package}.{service}/{method}"
 
         return requests.post(
             url,
