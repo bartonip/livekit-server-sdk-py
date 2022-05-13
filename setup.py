@@ -3,11 +3,8 @@ from setuptools import setup, find_packages
 
 # The version of this tool is based on the following steps:
 # https://packaging.python.org/guides/single-sourcing-package-version/
-VERSION = {}
+VERSION = "0.1.0"
 
-with open("./livekit/__init__.py") as fp:
-    # pylint: disable=W0122
-    exec(fp.read(), VERSION)
 
 setup(
     name="livekit",
@@ -15,7 +12,7 @@ setup(
     author_email="_livekit@barty.af",
     url="https://github.com/bartonip/livekit-server-sdk-py",
     description="A Python implementation of the LiveKit Server SDK",
-    version=VERSION.get("__version__", "0.0.0"),
+    version=VERSION,
     packages=find_packages(where=".", exclude=["tests"]),
     install_requires=[
         "setuptools>=45.0",
