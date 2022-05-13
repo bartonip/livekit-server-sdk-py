@@ -3,6 +3,7 @@ import jwt
 from .tokens import AccessToken
 from .room_service import RoomServiceClient
 from .recording_service import RecordingServiceClient
+from .egress import EgressClient
 from .grants import ClaimGrants
 from .twirp_rpc import TwirpRpcClient
 
@@ -21,6 +22,7 @@ class LiveKit:
         self._twirp_client = TwirpRpcClient(self)
         self.room_service = RoomServiceClient(self)
         self.recording_service = RecordingServiceClient(self)
+        self.egress_client = EgressClient(self)
 
     def generate_access_token(self, name: str = None, identity: str = None):
         return AccessToken(parent=self, name=name, identity=identity)
