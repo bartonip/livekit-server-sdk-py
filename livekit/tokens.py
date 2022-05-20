@@ -36,7 +36,7 @@ class AccessToken:
         self.grants.video = grant
 
     def to_jwt(self) -> str:
-        if (self.identity and self.grants.video and self.grants.video.room_join):
+        if (self.grants.video and self.grants.video.room_join and not self.identity):
             raise Exception("Identity is required for join but not set")
 
         token_data = {
