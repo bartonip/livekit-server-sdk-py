@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 # The version of this tool is based on the following steps:
 # https://packaging.python.org/guides/single-sourcing-package-version/
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 
 setup(
