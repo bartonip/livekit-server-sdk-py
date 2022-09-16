@@ -50,7 +50,7 @@ class AccessToken:
             token_data["sub"] = self.identity
             token_data["kid"] = self.identity
 
-        return jwt.encode(clean_null_terms(token_data), self.parent.api_secret).decode("utf-8")
+        return jwt.encode(clean_null_terms(token_data), self.parent.api_secret)
 
 
 class TokenVerifier:
